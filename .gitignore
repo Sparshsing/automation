@@ -1,0 +1,5 @@
+.ipynb_chckpoints/
+__pycache__/
+*.pyc
+*.{png,jpg,jpeg,gif,bmp,tiff,webp}
+*.{PNG,JPG,JPEG,GIF,BMP,TIFF,WEBP}
