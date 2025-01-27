@@ -9,24 +9,23 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (info.menuItemId === 'tokenCount' && info.selectionText) {
-    const tokenCount = await calculateTokenCount(info.selectionText);
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: showAlert,
-      args: [`Token Count: ${tokenCount}`],
-    });
-  }
-});
+    if (info.menuItemId === "tokenCount" && info.selectionText) {
+      const { tokenCount, wordCount } = await calculateCounts(info.selectionText);
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: showAlert,
+        args: [`Token Count: ${tokenCount}, Word Count: ${wordCount}`],
+      });
+    }
+  });
 
-async function calculateTokenCount(text) {
+async function calculateCounts(text) {
   const enc = getEncoding('cl100k_base');
   const tokens = enc.encode(text);
   const tokenCount = tokens.length;
-  return tokenCount;
-//   const wordCount = text.trim().split(/\s+/).length;
+  const wordCount = text.trim().split(/\s+/).length;
 
-//   return { tokenCount, wordCount };
+  return { tokenCount, wordCount };
 }
 
 function showAlert(message) {
