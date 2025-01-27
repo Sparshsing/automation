@@ -1,5 +1,6 @@
 .ipynb_checkpoints/
 __pycache__/
+node_modules/
 *.pyc
 **/*.png
 **/*.PNG
@@ -13,3 +14,4 @@ __pycache__/
 **/*.webp
 **/*.log
 **/*.db
+!token_counter_chrome_extension/icon.png
